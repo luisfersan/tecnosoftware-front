@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./layouts/Layout";
 import { Inicio } from "./views/Inicio";
+import { Carrito } from "./views/Carrito";
 
 const router = createBrowserRouter ([
 
@@ -12,6 +13,10 @@ const router = createBrowserRouter ([
       {
         index: true,
         element: <Inicio />
+      },
+      {
+        path: '/carrito',
+        element: <Carrito />
       }
     ]
   },
