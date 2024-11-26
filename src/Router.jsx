@@ -1,18 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Layout } from "./layouts/Layout";
+import { Inicio } from "./views/Inicio";
 
 const router = createBrowserRouter ([
 
   //EJEMPLO
-  // {
-  //   path: '/',
-  //   element: <Layout />, <----- vista a utiliazr
-  //   children: [     <----------- vistas hijas
-  //     {
-  //       index: true,    <------ es la vista por defecto
-  //       element: <Inicio />
-  //     }
-  //   ]
-  // },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Inicio />
+      }
+    ]
+  },
   // {
   //   path: '/auth',
   //   element: <AuthLayout />,
