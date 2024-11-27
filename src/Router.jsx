@@ -2,11 +2,11 @@ import { createBrowserRouter } from 'react-router-dom'
 import { Layout } from './layouts/Layout'
 import { Inicio } from './views/Inicio'
 import { Carrito } from './views/Carrito'
-import { Login } from './views/Login'
 import { AuthLayout } from './layouts/AuthLayout'
 import { Registro } from './views/Registro'
 import { AdminLayout } from './layouts/AdminLayout'
 import {Administrador} from './views/Administrador'
+import { Login } from './views/login'
 
 const router = createBrowserRouter([
   //EJEMPLO
