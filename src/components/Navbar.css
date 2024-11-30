@@ -1,0 +1,43 @@
+.navbar-scroll {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    transition: background-color 0.5s ease-in;
+    transition: height 0.5s ease-in-out;
+}
+
+.navbar-scroll.scrolled {
+    background-color: rgb(40, 84, 149);
+    height: 60px;
+    max-height: 60px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+@media (min-width:768px) {
+    .img-container {
+        display: block;
+        padding-top: 0;
+    }
+}
+
+.img-navbar {
+    max-height: 30px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+@media (max-width:768px) {
+
+    .nav-masthead{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}

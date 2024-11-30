@@ -6,7 +6,7 @@ import { AuthLayout } from './layouts/AuthLayout'
 import { Registro } from './views/Registro'
 import { AdminLayout } from './layouts/AdminLayout'
 import {Administrador} from './views/Administrador'
-import { Login } from './views/login'
+import { Login } from './views/Login'
 
 const router = createBrowserRouter([
   //EJEMPLO

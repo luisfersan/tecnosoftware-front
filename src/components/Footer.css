@@ -1,0 +1,10 @@
+@media (max-width:768px) {
+  .mq-text {
+    text-align: center;
+    
+  }
+
+  .flex-text {
+    justify-content: center;
+  }
+}

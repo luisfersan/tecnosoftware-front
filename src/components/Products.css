@@ -1,0 +1,7 @@
+#producto-1, #producto-2, #producto-3, #producto-4, #producto-5, #producto-6, #producto-7 {
+  content: '';
+  display: block;
+  height: 60px;
+  margin-top: -60px;
+  visibility: hidden;
+}
