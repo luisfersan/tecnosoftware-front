@@ -1,11 +1,3 @@
-// import React from 'react'
-
-// export const Login = () => {
-//   return (
-//     <div>L</div>
-//   )
-// }
-
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css' // Importa el archivo CSS correspondiente

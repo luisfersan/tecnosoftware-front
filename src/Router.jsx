@@ -4,9 +4,12 @@ import { Inicio } from './views/Inicio'
 import { Carrito } from './views/Carrito'
 import { AuthLayout } from './layouts/AuthLayout'
 import { Registro } from './views/Registro'
-import { AdminLayout } from './layouts/AdminLayout'
-import {Administrador} from './views/Administrador'
 import { Login } from './views/Login'
+import { AdminLayout } from './layouts/AdminLayout'
+import { Administrador } from './views/Administrador'
+import { Form } from './components/Form'
+import { Button } from './components/Form'
+import { InputField } from './components/InputField'
 
 const router = createBrowserRouter([
   //EJEMPLO
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: '/auth/registro',
         element: <Registro />,
+      },
+      {
+        path: '/auth/form',
+        element: <Form />,
+      },
+      {
+        path: '/auth/button',
+        element: <Button />,
+      },
+      {
+        path: '/auth/InputField',
+        element: <InputField />,
       },
     ],
   },

@@ -58,7 +58,7 @@ export const Navbar = () => {
           </a>
           <a
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-            href="#"
+            href="/auth/registro"
           >
             Carrito
           </a>
