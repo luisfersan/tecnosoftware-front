@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 export const Navbar = () => {
 
   const [scrolled, setScrolled] = useState(false);
+  
 
   useEffect(() => {
     const handleScroll = () => {
