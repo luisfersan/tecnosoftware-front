@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom'
 import './Navbar.css'
 import { useEffect, useState } from 'react'
 
 export const Navbar = () => {
+
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
+
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setScrolled(true)
@@ -33,6 +36,12 @@ export const Navbar = () => {
           />
         </div>
         <nav className="nav justify-content-center float-md-end gap-3 mx-5 nav-masthead">
+          {/* <Link
+            className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+            aria-current="page"
+            to="/auth/login"
+          > Iniciar Sesión
+          </Link> */}
           <a
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
             aria-current="page"

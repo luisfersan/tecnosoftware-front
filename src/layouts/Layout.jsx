@@ -9,17 +9,10 @@ export const Layout = () => {
   return (
     <>
       <Navbar />
-      <Home />
-
-      <CategoryBar />
-      <div  id='servicios' className="div-nav">
-          <Products />
-          </div>
-      <Footer />
-
       <div className="">
       <Outlet />
       </div>
+      <Footer />
     </>
   )
 }

@@ -5,7 +5,7 @@
 import React, { useState } from 'react'
 import './Registro.css' // Importa el archivo CSS correspondiente
 
-export const registro = () => {
+export const Registro = () => {
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
