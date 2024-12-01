@@ -1,0 +1,36 @@
+/* Estilo para el botón principal */
+.btn-primary {
+  background-color: #3b6978;
+  color: white; /* Texto en blanco */
+  border: none;
+  padding: 0.75rem;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #2a4c51; /* Color más oscuro al pasar el cursor */
+}
+
+/* Estilo para botones secundarios */
+.btn-secondary {
+  background-color: #28a745; /* Color verde para el botón secundario */
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #218838; /* Color más oscuro al pasar el cursor */
+}
+
+/* Estilo para los botones a pantalla completa */
+.w-100 {
+  width: 100%;
+}

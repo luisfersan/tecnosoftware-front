@@ -1,0 +1,56 @@
+/* Contenedor del formulario */
+.form-container {
+  padding: 2rem;
+  background-color: #3b6978; /* Fondo del formulario */
+  border-radius: 10px;
+  width: 400px;
+  margin: auto;
+}
+
+/* Título del formulario */
+.form-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+/* Mensaje de éxito */
+.form-success-message {
+  color: #28a745;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 16px;
+}
+
+/* Campo de entrada */
+.input-field-container {
+  margin-bottom: 1rem;
+}
+
+.input-label {
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo de los campos de entrada */
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Estilo del botón */
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
