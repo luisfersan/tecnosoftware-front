@@ -7,7 +7,7 @@ export const Footer = () => {
     <div className="container">
         <div className="row">
             <div className="col-12 col-md-6 pt-1">
-                <h6 className="m-0 text-white fw-bold mq-text">Desarrollado por: Daniel Hernández y Luís F. Sanchez</h6>
+                <h6 className="m-0 text-white fw-bold mq-text">Desarrollado por: Daniel Hernández y Luis F. Sanchez</h6>
                 <br />
                 <p className='text-white m-0'>Academia Desafio Latam</p>
                 <p className='text-white m-0'>Desarrolladores FullStack</p>

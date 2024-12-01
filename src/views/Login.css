@@ -1,0 +1,90 @@
+/* Contenedor principal de la página */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a1a1a; /* Fondo oscuro */
+}
+
+/* Formulario de inicio de sesión */
+.login-form {
+  padding: 2rem;
+  background-color: #3b6978; /* Fondo del formulario */
+  border-radius: 10px;
+  width: 400px;
+}
+
+/* Título del formulario */
+.login-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+/* Mensaje de error */
+.login-error {
+  color: #ff4d4d;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Mensaje de éxito */
+.login-success {
+  color: #28a745;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Grupo de entradas (campo de email y contraseña) */
+.login-input-group {
+  margin-bottom: 1rem;
+}
+
+/* Etiquetas de los campos */
+.login-label {
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo para los campos de entrada */
+.login-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Botón de inicio de sesión */
+.login-btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+/* Botón de registro (enlace a la página de registro) */
+.login-register-link {
+  text-align: center;
+  color: white;
+}
+
+.login-register-button {
+  font-weight: bold;
+  color: #007bff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
