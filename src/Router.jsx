@@ -8,8 +8,6 @@ import { Login } from './views/Login'
 import { AdminLayout } from './layouts/AdminLayout'
 import { Administrador } from './views/Administrador'
 import { Form } from './components/Form'
-import { Button } from './components/Button'
-import { InputField } from './components/InputField'
 import { AdminUsuarios } from './views/AdminUsuarios'
 import { AdminProductos } from './views/AdminProductos'
 
@@ -44,14 +42,6 @@ const router = createBrowserRouter([
       {
         path: '/auth/form',
         element: <Form />,
-      },
-      {
-        path: '/auth/button',
-        element: <Button />,
-      },
-      {
-        path: '/auth/InputField',
-        element: <InputField />,
       },
     ],
   },

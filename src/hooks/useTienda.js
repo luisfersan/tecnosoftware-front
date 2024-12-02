@@ -2,7 +2,7 @@ import { useContext } from "react";
 import TiendaContext from "../context/TiendaContext";
 
 const useTienda = () => {
-  return useContext(TiendaContext)
-}
+  return useContext(TiendaContext);
+};
 
-export default useTienda
+export default useTienda;

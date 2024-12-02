@@ -1,16 +1,23 @@
 import { useState } from 'react';
 import { products } from '../data/products';
-import ModalProduct from './ModalProduct'; // Importamos el modal de producto
+import ModalProduct from './ModalProduct';
+import useTienda from '../hooks/useTienda';
 import './Products.css';
 
 export const Products = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null); // Para guardar el producto seleccionado
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { addToCart } = useTienda();
 
   const handleClose = () => setShowModal(false);
   const handleShow = (product) => {
-    setSelectedProduct(product); // Establece el producto seleccionado
-    setShowModal(true); // Abre el modal
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setShowModal(false);
   };
 
   return (
@@ -34,7 +41,7 @@ export const Products = () => {
                   <button
                     type="button"
                     className="btn btn-success w-100 text-white"
-                    onClick={() => handleShow(product)}
+                    onClick={() => handleAddToCart(product)}
                   >
                     Agregar
                   </button>
@@ -45,12 +52,13 @@ export const Products = () => {
         ))}
       </div>
 
-      {/* Modal para el producto */}
+
       {selectedProduct && (
         <ModalProduct
           product={selectedProduct}
           show={showModal}
-          onClose={handleClose} // Cierra el modal
+          onClose={handleClose}
+          onAddToCart={handleAddToCart}
         />
       )}
     </div>

@@ -1,7 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 import './Products.css';
 
-const ModalProduct = ({ product, show, onClose }) => {
+const ModalProduct = ({ product, show, onClose, onAddToCart }) => {
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
@@ -25,7 +25,9 @@ const ModalProduct = ({ product, show, onClose }) => {
         <Button variant="secondary" onClick={onClose}>
           Cerrar
         </Button>
-        <Button variant="primary">Agregar al carrito</Button>
+        <Button variant="primary" onClick={() => onAddToCart(product)}>
+          Agregar al carrito
+        </Button>
       </Modal.Footer>
     </Modal>
   );
