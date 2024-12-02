@@ -10,6 +10,8 @@ import { Administrador } from './views/Administrador'
 import { Form } from './components/Form'
 import { Button } from './components/Button'
 import { InputField } from './components/InputField'
+import { AdminUsuarios } from './views/AdminUsuarios'
+import { AdminProductos } from './views/AdminProductos'
 
 const router = createBrowserRouter([
   //EJEMPLO
@@ -60,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: '/admin/inicio',
         element: <Administrador />,
+      },
+      {
+        path: '/admin/usuarios',
+        element: <AdminUsuarios />,
+      },
+      {
+        path: '/admin/productos',
+        element: <AdminProductos />,
       },
     ],
   },

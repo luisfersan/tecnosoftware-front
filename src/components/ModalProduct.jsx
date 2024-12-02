@@ -1,23 +1,34 @@
+import { Modal, Button } from 'react-bootstrap';
+import './Products.css';
 
-export default function ModalProduct({ product }) {
+const ModalProduct = ({ product, show, onClose }) => {
   return (
-    <div className="modal fade" id={`product-${product.id}`} tabIndex="-1" aria-labelledby="productLabel" aria-hidden="true">
-    <div className="modal-dialog modal-xl">
-      <div className="modal-content">
-        <div className="row">
-          <div className="col-12 col-md-4 rounded-start" style={{ backgroundImage: `url(/img/imagen5.png)`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
-            <div className="col-12 col-md-8 container">
-          <div className="modal-body">
-              <h5 className='text-center'>{product.name}</h5>
-              <p className=''>{product.description}</p>
-              <div className="d-flex justify-content-center my-3">
-                <button type="button" className="btn bg-orange w-25 text-white btn-orange-hover" data-bs-dismiss="modal">Cerrar</button>
-              </div>
-            </div>
-          </div>
+    <Modal show={show} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Detalles del Producto</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="d-flex flex-column align-items-center">
+          <img
+            src={`/img/${product.image}`}
+            alt={product.name}
+            className="img-fluid mb-3"
+            style={{ width: '100%', maxWidth: '300px' }}
+          />
+          <h5>{product.name}</h5>
+          <p>{product.description}</p>
+          <p>Precio: ${product.price}</p>
+          <p>Stock: {product.stock}</p>
         </div>
-      </div>
-    </div>
-  </div>
-  )
-}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onClose}>
+          Cerrar
+        </Button>
+        <Button variant="primary">Agregar al carrito</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
+export default ModalProduct;
