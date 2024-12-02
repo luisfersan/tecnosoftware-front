@@ -3,11 +3,9 @@ import './Navbar.css'
 import { useEffect, useState } from 'react'
 
 export const Navbar = () => {
-
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setScrolled(true)
@@ -52,13 +50,13 @@ export const Navbar = () => {
           <a
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
             aria-current="page"
-            href="#"
+            href="/auth/registro"
           >
             Crear Cuenta
           </a>
           <a
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-            href="/auth/registro"
+            href="#"
           >
             Carrito
           </a>

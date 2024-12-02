@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
-<<<<<<< HEAD
 import { InputField } from './InputField'
 import { Button } from './Button'
-=======
-import {InputField} from './InputField'
-import {Button} from './Button'
->>>>>>> 0e4f8983df9af28cb1dc8712fa248b857e9a0dd5
 import './Form.css' // Importa el archivo CSS correspondiente
 
 export const Form = () => {
