@@ -1,4 +1,4 @@
-# Módulo 6 Introducción Express JS - Desafío 2 - Mi Repertorio
+# Módulo 7 Hito 2 Desarrollo Frontend - e-commerce del Marketplace de Tecnología y Software “TecnoSoftware”
 
 ## Presentación del Desafío
 
