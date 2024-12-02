@@ -28,6 +28,8 @@ En la consola bash:
 5. Utilizamos Context API para el manejo del estado global.
 6. Preparamos la aplicación para el consumo de datos siguiendo el contrato definido en el hito 1.
 
+En cosntrucción: menú Carrito, Mi Perfil y ajustes generales.
+
 ## <br/>
 
 ## Tecnologías Usadas 🛠️
