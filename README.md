@@ -32,9 +32,9 @@ En la consola bash:
 
 ## Tecnologías Usadas 🛠️
 
-- **Backend:** Node.js, Express.js, File System. 🧑‍💻
+- **Backend:** Node.js, Express.js, JS. 🧑‍💻
 - **Frontend:** HTML, CSS, Bootstrap, Axios. 📚
-- **Almacenamiento:** Archivo JSON (repertorio.json). 🫙
+- **Almacenamiento:** Archivos JSON. 🫙
 
 <br/>
 
