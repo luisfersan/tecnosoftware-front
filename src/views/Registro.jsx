@@ -52,7 +52,7 @@ export const Registro = () => {
   }
 
   return (
-    <div className="register-container">
+    <div className="d-flex justify-content-center align-items-center my-5">
       <form
         onSubmit={handleSubmit}
         className="register-form"

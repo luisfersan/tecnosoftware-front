@@ -12,32 +12,28 @@ export const AdminNavbar = () => {
           />
         </div>
         <nav className="nav justify-content-center gap-3 mx-5 nav-masthead">
-          {/* <Link
-          className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-          aria-current="page"
-          to="/auth/login"
-        > Iniciar Sesión
-        </Link> */}
-          <a
+
+          <Link
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
             aria-current="page"
-            href="/auth/login"
+            to="/admin/usuarios"
           >
             Usuarios
-          </a>
-          <a
+          </Link>
+          <Link
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
             aria-current="page"
-            href="#"
+            to="/admin/productos"
           >
             Productos
-          </a>
-          <a
+          </Link>
+          <Link
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-            href="#"
+            to="/perfil"
           >
             Mi Perfil
-          </a>
+          </Link>
+
         </nav>
       </div>
     </header>

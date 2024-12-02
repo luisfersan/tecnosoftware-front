@@ -34,7 +34,7 @@ export const Carrito = () => {
           >
             -
           </Button>
-          <span className="mx-3">{row.quantity}</span>
+          <span className="mx-3 d-flex align-items-center">{row.quantity}</span>
           <Button
             variant="outline-secondary"
             onClick={() => increaseQuantity(row.id)}
@@ -74,7 +74,7 @@ export const Carrito = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center mt-5">Carrito de Compras</h1>
+      <h1 className="text-center text-white mt-5">Carrito de Compras</h1>
 
       {cart.length === 0 ? (
         <p className="text-center">Tu carrito está vacío.</p>
@@ -96,13 +96,13 @@ export const Carrito = () => {
             }}
           />
 
-          <div className="d-flex justify-content-between mt-4">
+          <div className="text-white d-flex justify-content-between mt-4">
             <h3>Total: ${total.toFixed(2)}</h3>
             <Button variant="warning" onClick={clearCart}>
               Vaciar carrito
             </Button>
-            <Button variant="success">
-              Proceder al pago
+            <Button variant="success w-25">
+              Pagar
             </Button>
           </div>
         </>

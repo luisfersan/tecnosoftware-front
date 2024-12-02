@@ -42,7 +42,7 @@ export const Login = () => {
   }
 
   return (
-    <div className="login-container">
+    <div className="d-flex justify-content-center align-items-center vh-100">
       <form
         onSubmit={handleSubmit}
         className="login-form"
