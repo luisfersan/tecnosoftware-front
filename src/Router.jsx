@@ -9,6 +9,7 @@ import { AdminLayout } from './layouts/AdminLayout'
 import { Administrador } from './views/Administrador'
 import { AdminUsuarios } from './views/AdminUsuarios'
 import { AdminProductos } from './views/AdminProductos'
+import { Usuario } from './views/Usuario'
 
 const router = createBrowserRouter([
   //EJEMPLO
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/carrito',
         element: <Carrito />,
+      },
+      {
+        path: '/perfil',
+        element: <Usuario />,
       },
     ],
   },
