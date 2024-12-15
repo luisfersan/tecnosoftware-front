@@ -6,7 +6,7 @@ import useTienda from '../hooks/useTienda';
 
 export const AdminUsuarios = () => {
 
-  const {getAllProfiles, allProfiles} = useTienda()
+  const {getAllProfiles, allProfiles, updateUserById, deleteUserById} = useTienda()
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -18,8 +18,13 @@ useEffect(() => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (id) => {
-    alert(`Eliminar usuario con ID: ${id}`);
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      `¿Estás seguro de que deseas eliminar al usuario con ID: ${id}?`
+    );
+    if (confirmDelete) {
+      deleteUserById(id)
+    }
   };
 
   const columnas = [
@@ -69,6 +74,9 @@ useEffect(() => {
     selectAllRowsItemText: 'Todos',
   };
 
+  console.log(allProfiles)
+
+
   return (
     <div className="container my-5 py-5">
       <DataTable
@@ -86,6 +94,7 @@ useEffect(() => {
         user={selectedUser}
         onClose={() => setIsModalOpen(false)}
         isModalOpen={isModalOpen}
+        updateUserById={updateUserById}
       />
     </div>
   );

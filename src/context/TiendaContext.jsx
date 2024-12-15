@@ -105,6 +105,33 @@ const TiendaProvider = ({ children }) => {
     }
   };
 
+const updateUserById = async (id, userData) => {
+  try {
+    const token = localStorage.getItem("AUTH_TOKEN");
+    const { data } = await clienteAxios.put(`/users/${id}`, userData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  getAllProfiles();
+  } catch (error) {
+    console.error("Error al actualizar el perfil:", error);
+  }
+}
+
+const deleteUserById = async (id) => {
+  try {
+    const token = localStorage.getItem("AUTH_TOKEN");
+    await clienteAxios.delete(`/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    getAllProfiles();
+  } catch (error) {
+    console.error("Error al eliminar el perfil:", error);
+  }
+}
   //FIN FUNCIONES PERFIL
 
 
@@ -175,9 +202,37 @@ const TiendaProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setProducts(data.data);
+      setAllProducts(data.data);
     } catch (error) {
       console.error("Error al obtener productos:", error);
+    }
+  };
+
+  const updateProductById = async (id, productData) => {
+    try {
+      const token = localStorage.getItem("AUTH_TOKEN");
+      const { data } = await clienteAxios.put(`/products/${id}`, productData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getAllProducts();
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error);
+    }
+  };
+
+  const deleteProductById = async (id) => {
+    try {
+      const token = localStorage.getItem("AUTH_TOKEN");
+      await clienteAxios.delete(`/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getAllProducts();
+    } catch (error) {
+      console.error("Error al eliminar el producto:", error);
     }
   };
 
@@ -283,8 +338,13 @@ const TiendaProvider = ({ children }) => {
         updateProfile,
         handleClickEndSession,
         getAllProducts,
+        allProducts,
         getAllProfiles,
-        allProfiles
+        allProfiles,
+        updateUserById,
+        deleteUserById,
+        updateProductById,
+        deleteProductById
       }}
     >
       {children}

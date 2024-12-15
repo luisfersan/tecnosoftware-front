@@ -1,19 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import { products } from '../data/products';
 import ModalAdminProduct from '../components/ModalAdminProduct';
+import useTienda from '../hooks/useTienda';
 
 export const AdminProductos = () => {
+  const { allProducts, getAllProducts, updateProductById, deleteProductById } = useTienda();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    getAllProducts(); // Cargar productos al montar el componente
+  }, []);
 
   const handleEdit = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
 
-  const handleDelete = (id) => {
-    alert(`Eliminar producto con ID: ${id}`);
+  const handleDelete = async (id) => {
+    const confirm = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
+    if (confirm) {
+      await deleteProductById(id); // Llamar a la función del contexto
+    }
   };
 
   const columnas = [
@@ -68,18 +76,20 @@ export const AdminProductos = () => {
   ];
 
   const paginacion = {
-    rowsPerPageText: 'Filas por página',
+    rowsPerPageText: 'Filas por página',
     rangeSeparatorText: 'de',
     selectAllRowsItem: true,
     selectAllRowsItemText: 'Todos',
   };
 
+  console.log(allProducts.products)
+
   return (
     <div className="container my-5 py-5">
       <DataTable
-        title="Lista de productos"
+        title="Lista de Productos"
         columns={columnas}
-        data={products.data.products}
+        data={allProducts.products}
         pagination
         paginationComponentOptions={paginacion}
         fixedHeader
@@ -91,6 +101,7 @@ export const AdminProductos = () => {
         product={selectedProduct}
         onClose={() => setIsModalOpen(false)}
         isModalOpen={isModalOpen}
+        updateProductById={updateProductById}
       />
     </div>
   );
