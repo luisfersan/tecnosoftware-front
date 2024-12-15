@@ -1,53 +1,55 @@
-// export const Registro = () => {
-//   return <div>Registro</div>
-// }
-
 import React, { useState } from 'react'
 import './Registro.css' // Importa el archivo CSS correspondiente
+import clienteAxios from '../config/axios'
+import { useNavigate } from 'react-router-dom'
 
 export const Registro = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
-    mobile: '',
-    email: '',
-    id: '',
-  })
+
+  const navigate = useNavigate()
+
+  const usernameRef = React.createRef()
+  const emailRef = React.createRef()
+  const passwordRef = React.createRef()
+  const repeatPasswordRef = React.createRef()
+
 
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { name, surname, mobile, email, id } = formData
-
-    // Validar que todos los campos estén llenos
-    if (!name || !surname || !mobile || !email || !id) {
+    // // Validar que todos los campos estén llenos
+    if (!usernameRef.current.value || !emailRef.current.value || !passwordRef.current.value || !repeatPasswordRef.current.value) {
       setErrorMessage('Todos los campos deben ser diligenciados.')
-      setSuccessMessage('') // Limpia el mensaje de éxito
+      setSuccessMessage('')
+    } else if(passwordRef.current.value !== repeatPasswordRef.current.value){
+      setErrorMessage('Las contraseñas no coinciden.')
+      setSuccessMessage('')
     } else {
-      setErrorMessage('')
-      setSuccessMessage('¡Se creó el registro correctamente!')
+      const datos = {
+        username: usernameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }
 
-      // Blanquear los campos
-      setFormData({
-        name: '',
-        surname: '',
-        mobile: '',
-        email: '',
-        id: '',
-      })
-
-      // Desaparecer el mensaje de éxito después de 2 segundos
-      setTimeout(() => {
+      try {
+        const {data} = await clienteAxios.post('/users/auth/register', datos)
+        if (data.status === "success") {
+          setErrorMessage('')
+          setSuccessMessage(data.message)
+          setTimeout(() => {
+            navigate('/')
+          }, 2000)
+        } else {
+          setErrorMessage(data.message)
+          setSuccessMessage('')
+        }
+      } catch (error) {
+        setErrorMessage(error.response.data.message)
         setSuccessMessage('')
-      }, 2000)
+      }
+
     }
   }
 
@@ -63,38 +65,13 @@ export const Registro = () => {
         {errorMessage && <p className="register-error">{errorMessage}</p>}
 
         <div className="register-input-group">
-          <label className="register-label">Nombres:</label>
+          <label className="register-label">Nombre completo:</label>
           <input
             type="text"
             name="name"
             className="register-input"
-            value={formData.name}
-            onChange={handleChange}
             placeholder="Ingresa tu nombre"
-          />
-        </div>
-
-        <div className="register-input-group">
-          <label className="register-label">Apellidos:</label>
-          <input
-            type="text"
-            name="surname"
-            className="register-input"
-            value={formData.surname}
-            onChange={handleChange}
-            placeholder="Ingresa tu apellido"
-          />
-        </div>
-
-        <div className="register-input-group">
-          <label className="register-label">Móvil:</label>
-          <input
-            type="text"
-            name="mobile"
-            className="register-input"
-            value={formData.mobile}
-            onChange={handleChange}
-            placeholder="Ingresa tu número móvil"
+            ref={usernameRef}
           />
         </div>
 
@@ -104,21 +81,30 @@ export const Registro = () => {
             type="email"
             name="email"
             className="register-input"
-            value={formData.email}
-            onChange={handleChange}
             placeholder="Ingresa tu correo electrónico"
+            ref={emailRef}
           />
         </div>
 
         <div className="register-input-group">
-          <label className="register-label">ID:</label>
+          <label className="register-label">Password:</label>
           <input
-            type="text"
-            name="id"
+            type="password"
+            name="password"
             className="register-input"
-            value={formData.id}
-            onChange={handleChange}
-            placeholder="Ingresa tu ID"
+            placeholder="Ingresa tu password"
+            ref={passwordRef}
+          />
+        </div>
+
+        <div className="register-input-group">
+          <label className="register-label">Repite el Password:</label>
+          <input
+            type="password"
+            name="repetirPassword"
+            className="register-input"
+            placeholder="Repite tu password"
+            ref={repeatPasswordRef}
           />
         </div>
 

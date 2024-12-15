@@ -75,7 +75,7 @@ export const AdminProductos = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container my-5 py-5">
       <DataTable
         title="Lista de productos"
         columns={columnas}

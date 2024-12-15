@@ -20,7 +20,6 @@ export const Form = () => {
   }
 
   const handleSubmit = () => {
-    console.log('Datos capturados:', formData)
 
     // Mostrar el mensaje de éxito
     setSuccessMessage(true)

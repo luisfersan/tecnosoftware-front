@@ -88,3 +88,7 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.link-text{
+  font-size: 12px;
+}

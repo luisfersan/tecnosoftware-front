@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { users } from '../data/users';
 import ModalAdminUser from '../components/ModalAdminUser';
+import useTienda from '../hooks/useTienda';
 
 export const AdminUsuarios = () => {
+
+  const {getAllProfiles, allProfiles} = useTienda()
   const [selectedUser, setSelectedUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+useEffect(() => {
+  getAllProfiles()
+}, [])
   const handleEdit = (user) => {
     setSelectedUser(user);
     setIsModalOpen(true);
@@ -64,11 +70,11 @@ export const AdminUsuarios = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container my-5 py-5">
       <DataTable
         title="Lista de Usuarios"
         columns={columnas}
-        data={users.data.users}
+        data={allProfiles.users}
         pagination
         paginationComponentOptions={paginacion}
         fixedHeader

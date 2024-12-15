@@ -1,65 +1,76 @@
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 import { useEffect, useState } from 'react'
-import { useAuth } from '../hooks/useAuth'
+import useTienda from '../hooks/useTienda'
 
 export const Navbar = () => {
-  const { user } = useAuth()
-  const [scrolled, setScrolled] = useState(false)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+  const { profile, handleClickEndSession } = useTienda()
 
   return (
     <header
-      className={`mb-auto fixed-top navbar-scroll ${scrolled ? 'scrolled' : ''
-        }`}
+      className='w-100 navbar navbar-expand-lg navbar-primary bg-dark fixed-top py-2'
     >
-      <div className="container">
-        <div className="img-container mx-5">
+      <div className="container d-flex justify-content-between movile-view">
+        <div className="img-container">
+
+
+
+
           <Link to="/">
-          <img
-            src=""
-            alt="TecnoSoftware"
-            className="float-md-start mb-0 img-navbar"
-          />
+            <img
+              src=""
+              alt="TecnoSoftware"
+              className="mb-0 img-navbar"
+            />
           </Link>
         </div>
-        <nav className="nav justify-content-center float-md-end gap-3 mx-5 nav-masthead">
-          {!user ? (
-              <div>
-                      <Link
-                      className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-                      aria-current="page"
-                      to="/auth/login"
-                    >
-                      Iniciar Sesión
-                    </Link>
-                    <Link
-                      className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-                      aria-current="page"
-                      to="/auth/registro"
-                    >
-                      Crear Cuenta
-                    </Link>
-              </div>
-          ) :           <Link
-          className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
-          to="/perfil"
-        >
-          Mi Perfil
-        </Link>}
+        <nav className="nav justify-content-center  gap-3 mx-5 nav-masthead">
+
+        {profile.admin ? (
+            <>
+              <Link
+                className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+                aria-current="page"
+                to="/admin/usuarios"
+              >
+                Usuarios
+              </Link>
+              <Link
+                className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+                aria-current="page"
+                to="/admin/productos"
+              >
+                Productos
+              </Link>
+            </>
+          ) : <></>}
+
+          {Object.keys(profile).length === 0 ? (
+            <>
+              <Link
+                className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+                aria-current="page"
+                to="/auth/login"
+              >
+                Iniciar Sesión
+              </Link>
+              <Link
+                className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+                aria-current="page"
+                to="/auth/registro"
+              >
+                Crear Cuenta
+              </Link>
+            </>
+          ) : (
+            <Link
+              className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+              to="/perfil"
+            >
+              Mi Perfil
+            </Link>
+          )}
 
           <Link
             className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
@@ -67,6 +78,21 @@ export const Navbar = () => {
           >
             Carrito
           </Link>
+
+          {Object.keys(profile).length > 0 ? (
+            <>
+              <Link
+                className="link-light link-opacity-75-hover text-decoration-none text-uppercase"
+                aria-current="page"
+                onClick={() => handleClickEndSession()}
+                to="/"
+              >
+                Cerrar Sesión
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
 
         </nav>
       </div>

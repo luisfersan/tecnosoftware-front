@@ -1,11 +1,13 @@
 import DataTable from 'react-data-table-component';
 import useTienda from '../hooks/useTienda';
 import { Button, Modal, Form } from 'react-bootstrap'
+import { useState } from 'react';
 
 export const Usuario = () => {
 
   const {
-    user,
+    profile,
+    updateProfile,
     purchasedProducts,
     showEditModal,
     handleSetShowEditModal,
@@ -13,16 +15,28 @@ export const Usuario = () => {
     handleSetShowEvaluateModal,
     selectedProduct,
     handleSetSelectedProduct,
-    editedUser,
-    handleSetEditedUser,
-    rating,
-    handleSetRating,
-    comment,
-    handleSetComment,
-    handleEditUser,
-    handleEvaluateProduct
+    evaluateProduct
   } = useTienda();
 
+    // Estado local para los datos del formulario de evaluación.
+    const [evaluation, setEvaluation] = useState({
+      rating: 5, // Valor inicial de la calificación.
+      comment: "", // Valor inicial del comentario.
+    });
+  
+    // Maneja los cambios en el formulario de evaluación.
+    const handleEvaluationChange = (e) => {
+      setEvaluation({
+        ...evaluation, // Mantiene los valores existentes.
+        [e.target.name]: e.target.value, // Actualiza el campo que cambió.
+      });
+    };
+  
+    // Envía los datos del formulario de evaluación al contexto.
+    const handleEvaluateSubmit = (e) => {
+      e.preventDefault(); // Previene el comportamiento por defecto del formulario.
+      evaluateProduct(selectedProduct.product_id, evaluation); // Llama a la función del contexto con el producto y la evaluación.
+    };
 
   const columns = [
     {
@@ -52,101 +66,64 @@ export const Usuario = () => {
   ]
 
   return (
-    <div className="container mt-5">
-      <div className="row">
-        {/* Información del Usuario */}
-        <div className="col-md-4">
-          <h3>Información del Usuario</h3>
-          <p><strong>Username:</strong> {user?.username}</p>
-          <p><strong>Email:</strong> {user?.email}</p>
-          <Button variant="primary" onClick={() => handleSetShowEditModal(true)}>Editar Información</Button>
-        </div>
-
-        {/* Tabla de Productos Comprados */}
-        <div className="col-md-8">
-          <h3>Productos Comprados</h3>
-          <DataTable
-            columns={columns}
-            data={purchasedProducts}
-            noDataComponent="Todavia no has realizado una compra"
-            pagination
-            highlightOnHover
-          />
-        </div>
-
-        {/* Modal para Editar Usuario */}
-        <Modal show={showEditModal} onHide={() => handleSetShowEditModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Editar Información</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3" controlId="formUsername">
-                <Form.Label>Username</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={editedUser.username}
-                  onChange={e => handleSetEditedUser({ ...editedUser, username: e.target.value })}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={editedUser.email}
-                  onChange={e => handleSetEditedUser({ ...editedUser, email: e.target.value })}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={editedUser.password}
-                  onChange={e => handleSetEditedUser({ ...editedUser, password: e.target.value })}
-                />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => handleSetShowEditModal(false)}>Cerrar</Button>
-            <Button variant="primary" onClick={handleEditUser}>Guardar Cambios</Button>
-          </Modal.Footer>
-        </Modal>
-
-        {/* Modal para Evaluar Producto */}
-        <Modal show={showEvaluateModal} onHide={() => handleSetShowEvaluateModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Evaluar Producto</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3" controlId="formRating">
-                <Form.Label>Calificación (1-5)</Form.Label>
-                <Form.Control
-                  type="number"
-                  value={rating}
-                  onChange={e => handleSetRating(e.target.value)}
-                  min="1"
-                  max="5"
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formComment">
-                <Form.Label>Comentario</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  value={comment}
-                  onChange={e => handleSetComment(e.target.value)}
-                />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => handleSetShowEvaluateModal(false)}>Cerrar</Button>
-            <Button variant="primary" onClick={handleEvaluateProduct}>Enviar Evaluación</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+    <div className="container mt-4 py-5">
+    {/* Información del Perfil */}
+    <div className="d-flex justify-content-between align-items-center mb-4">
+      <h2 className="text-white">Mi Perfil</h2>
     </div>
+
+    <div className="card p-3 mb-4">
+      <h5>Información del Usuario</h5>
+      <p><strong>Nombre:</strong> {profile?.username}</p>
+      <p><strong>Email:</strong> {profile?.email}</p>
+    </div>
+
+    {/* Tabla de Compras */}
+    <h3 className="text-white">Historial de Compras</h3>
+    <DataTable
+      columns={columns}
+      data={purchasedProducts} // Datos de las compras realizadas
+      pagination
+    />
+
+
+    {/* Modal para Evaluar Producto */}
+    <Modal show={showEvaluateModal} onHide={() => handleSetShowEvaluateModal(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Evaluar Producto</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {selectedProduct && (
+          <>
+            <h5>{selectedProduct.product_name}</h5>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Puntuación</Form.Label>
+                <Form.Control as="select">
+                  <option value="5">5 - Excelente</option>
+                  <option value="4">4 - Muy Bueno</option>
+                  <option value="3">3 - Bueno</option>
+                  <option value="2">2 - Regular</option>
+                  <option value="1">1 - Malo</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Comentario</Form.Label>
+                <Form.Control as="textarea" rows={3} placeholder="Escribe tu opinión..." />
+              </Form.Group>
+            </Form>
+          </>
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={() => handleSetShowEvaluateModal(false)}>
+          Cancelar
+        </Button>
+        <Button variant="success" onClick={() => { /* Lógica para enviar evaluación */ }}>
+          Enviar Evaluación
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  </div>
   )
 }

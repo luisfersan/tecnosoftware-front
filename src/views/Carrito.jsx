@@ -9,7 +9,7 @@ export const Carrito = () => {
 
   useEffect(() => {
     const calculateTotal = () => {
-      const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const totalAmount = cart.reduce((sum, item) => sum + item.product_price * item.quantity, 0);
       setTotal(totalAmount);
     };
     calculateTotal();
@@ -19,7 +19,7 @@ export const Carrito = () => {
   const columns = [
     {
       name: 'Producto',
-      selector: row => row.name,
+      selector: row => row.product_name,
       sortable: true,
     },
     {
@@ -29,7 +29,7 @@ export const Carrito = () => {
         <div className="d-flex justify-content-center">
           <Button
             variant="outline-secondary"
-            onClick={() => decreaseQuantity(row.id)}
+            onClick={() => decreaseQuantity(row.product_id)}
             disabled={row.quantity === 1}
           >
             -
@@ -37,7 +37,7 @@ export const Carrito = () => {
           <span className="mx-3 d-flex align-items-center">{row.quantity}</span>
           <Button
             variant="outline-secondary"
-            onClick={() => increaseQuantity(row.id)}
+            onClick={() => increaseQuantity(row.product_id)}
             disabled={row.quantity === 9}
           >
             +
@@ -48,15 +48,15 @@ export const Carrito = () => {
     },
     {
       name: 'Precio',
-      selector: row => row.price,
+      selector: row => row.product_price,
       sortable: true,
-      cell: row => `$${row.price}`,
+      cell: row => `$${row.product_price}`,
     },
     {
       name: 'Total',
-      selector: row => row.price * row.quantity,
+      selector: row => row.product_price * row.quantity,
       sortable: false,
-      cell: row => `$${(row.price * row.quantity).toFixed(2)}`,
+      cell: row => `$${(row.product_price * row.quantity).toFixed(2)}`,
     },
     {
       name: 'Acciones',
@@ -64,7 +64,7 @@ export const Carrito = () => {
       cell: row => (
         <Button
           variant="danger"
-          onClick={() => removeFromCart(row.id)}
+          onClick={() => removeFromCart(row.product_id)}
         >
           Eliminar
         </Button>

@@ -1,43 +1,51 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Login.css' // Importa el archivo CSS correspondiente
+import clienteAxios from '../config/axios'
+import useTienda from '../hooks/useTienda'
 
 export const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+
+  const emailRef = React.createRef()
+  const passwordRef = React.createRef()
 
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
   const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
+  const {getProfile} = useTienda()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const { email, password } = formData
-
     // Validar que todos los campos estén llenos
-    if (!email || !password) {
+    if (!emailRef.current.value || !passwordRef.current.value) {
       setErrorMessage('Todos los campos deben ser diligenciados.')
       setSuccessMessage('')
     } else {
-      setErrorMessage('')
-      setSuccessMessage('¡Inició sesión correctamente!')
+      const datos = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }
 
-      // Limpiar campos
-      setFormData({ email: '', password: '' })
-
-      // Mostrar mensaje por 3 segundos
-      setTimeout(() => {
+      try {
+        const { data } = await clienteAxios.post('/users/auth/login', datos)
+        if (data.status === "success") {
+          localStorage.setItem('AUTH_TOKEN', data.data.token);
+          getProfile()
+          setErrorMessage('')
+          setSuccessMessage(data.message)
+          setTimeout(() => {
+            navigate('/')
+          }, 2000)
+        } else {
+          setErrorMessage(data.message)
+          setSuccessMessage('')
+        }
+      } catch (error) {
+        setErrorMessage(error.response.data.message)
         setSuccessMessage('')
-        navigate('/') // Redirigir al home
-      }, 3000)
+      }
     }
   }
 
@@ -61,9 +69,8 @@ export const Login = () => {
             type="email"
             name="email"
             className="login-input"
-            value={formData.email}
-            onChange={handleChange}
             placeholder="Ingresa tu correo electrónico"
+            ref={emailRef}
           />
         </div>
 
@@ -73,9 +80,8 @@ export const Login = () => {
             type="password"
             name="password"
             className="login-input"
-            value={formData.password}
-            onChange={handleChange}
             placeholder="Ingresa tu contraseña"
+            ref={passwordRef}
           />
         </div>
 
@@ -86,15 +92,20 @@ export const Login = () => {
           Ingresar
         </button>
 
-        <p className="login-register-link">
-          No tienes tu cuenta:{' '}
-          <button
-            className="login-register-button"
-            onClick={() => navigate('/register')}
-          >
-            Regístrate
-          </button>
-        </p>
+        <div className="d-flex justify-content-between">
+        <Link
+          to="/registro"
+          className="link-light link-opacity-75-hover text-decoration-none link-text"
+        >
+          ¿No tienes una cuenta? Registrate
+        </Link>
+        <Link
+          to="/"
+          className="link-light link-opacity-75-hover text-decoration-none link-text"
+        >
+          Volver al inicio
+        </Link>
+        </div>
       </form>
     </div>
   )
