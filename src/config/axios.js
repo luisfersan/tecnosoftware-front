@@ -1,10 +1,12 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const clienteAxios = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://tecnosoftware-back.onrender.com',
+  // baseURL: 'http://localhost:3000',
+
   // headers: {
   //   'Content-Type': 'application/json',
   // }
-});
+})
 
-export default clienteAxios;
+export default clienteAxios
