@@ -1,7 +1,7 @@
 import DataTable from 'react-data-table-component';
 import useTienda from '../hooks/useTienda';
 import { Button, Modal, Form } from 'react-bootstrap'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const Usuario = () => {
 
@@ -9,6 +9,7 @@ export const Usuario = () => {
     profile,
     updateProfile,
     purchasedProducts,
+    getPurchasedProducts,
     showEditModal,
     handleSetShowEditModal,
     showEvaluateModal,
@@ -18,21 +19,19 @@ export const Usuario = () => {
     evaluateProduct
   } = useTienda();
 
-    // Estado local para los datos del formulario de evaluación.
+
     const [evaluation, setEvaluation] = useState({
-      rating: 5, // Valor inicial de la calificación.
-      comment: "", // Valor inicial del comentario.
+      rating: 5,
+      comment: "",
     });
-  
-    // Maneja los cambios en el formulario de evaluación.
+
     const handleEvaluationChange = (e) => {
       setEvaluation({
-        ...evaluation, // Mantiene los valores existentes.
-        [e.target.name]: e.target.value, // Actualiza el campo que cambió.
+        ...evaluation,
+        [e.target.name]: e.target.value,
       });
     };
-  
-    // Envía los datos del formulario de evaluación al contexto.
+
     const handleEvaluateSubmit = (e) => {
       e.preventDefault(); // Previene el comportamiento por defecto del formulario.
       evaluateProduct(selectedProduct.product_id, evaluation); // Llama a la función del contexto con el producto y la evaluación.
@@ -64,6 +63,10 @@ export const Usuario = () => {
       ),
     },
   ]
+
+  useEffect(() => {
+        getPurchasedProducts(profile?.id);
+  }, []);
 
   return (
     <div className="container mt-4 py-5">

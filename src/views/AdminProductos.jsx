@@ -82,8 +82,6 @@ export const AdminProductos = () => {
     selectAllRowsItemText: 'Todos',
   };
 
-  console.log(allProducts.products)
-
   return (
     <div className="container my-5 py-5">
       <DataTable

@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner, Alert } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import useTienda from '../hooks/useTienda';
+import clienteAxios from '../config/axios';
+import { useNavigate } from 'react-router-dom';
 
 export const Carrito = () => {
-  const { cart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useTienda();
+  const { cart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, profile } = useTienda();
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const calculateTotal = () => {
@@ -15,6 +21,39 @@ export const Carrito = () => {
     calculateTotal();
   }, [cart]);
 
+  const handleClickPagar = async () => {
+    const token = localStorage.getItem("AUTH_TOKEN");
+    if (!token) {
+      localStorage.removeItem("AUTH_TOKEN");
+      navigate("/auth/login");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      
+      const payload = {
+        user_id: profile.id,
+        products: cart.map(item => ({
+          product_id: item.product_id,
+          quantity: item.quantity,
+        }))
+      };
+
+      const response = await clienteAxios.post("/orders", payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      clearCart();
+      navigate("/perfil");
+    } catch (err) {
+      setError('Error al procesar la compra. Inténtalo de nuevo.');
+      console.error(err.response?.data || err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const columns = [
     {
@@ -96,13 +135,15 @@ export const Carrito = () => {
             }}
           />
 
+          {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
+
           <div className="text-white d-flex justify-content-between mt-4">
             <h3>Total: ${total.toFixed(2)}</h3>
             <Button variant="warning" onClick={clearCart}>
               Vaciar carrito
             </Button>
-            <Button variant="success w-25">
-              Pagar
+            <Button variant="success w-25" onClick={handleClickPagar} disabled={loading}>
+              {loading ? <Spinner as="span" animation="border" size="sm" /> : 'Pagar'}
             </Button>
           </div>
         </>

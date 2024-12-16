@@ -39,7 +39,7 @@ const ModalAdminUser = ({ user, onClose, isModalOpen, updateUserById }) => {
               type="text"
               className="form-control"
               defaultValue={user.username}
-              ref={usernameRef} // Asocia la referencia
+              ref={usernameRef}
             />
           </div>
           <div>
@@ -56,8 +56,8 @@ const ModalAdminUser = ({ user, onClose, isModalOpen, updateUserById }) => {
               type="checkbox"
               className="form-check-input"
               id="adminCheckbox"
-              defaultChecked={user.admin} // Refleja el estado actual
-              ref={adminRef} // Asocia la referencia
+              defaultChecked={user.admin}
+              ref={adminRef}
             />
             <label className="form-check-label" htmlFor="adminCheckbox">
               ¿Es administrador?

@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import clienteAxios from "../config/axios";
 import { jwtDecode } from 'jwt-decode';
+import { Navigate } from "react-router-dom";
 
 const TiendaContext = createContext();
 
@@ -53,6 +54,7 @@ const TiendaProvider = ({ children }) => {
         localStorage.removeItem('AUTH_TOKEN');
         return;
       }
+
       setProfile(data.data.user);
     } catch (error) {
       console.error('Error fetching profile:', error);
@@ -105,33 +107,33 @@ const TiendaProvider = ({ children }) => {
     }
   };
 
-const updateUserById = async (id, userData) => {
-  try {
-    const token = localStorage.getItem("AUTH_TOKEN");
-    const { data } = await clienteAxios.put(`/users/${id}`, userData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  getAllProfiles();
-  } catch (error) {
-    console.error("Error al actualizar el perfil:", error);
+  const updateUserById = async (id, userData) => {
+    try {
+      const token = localStorage.getItem("AUTH_TOKEN");
+      const { data } = await clienteAxios.put(`/users/${id}`, userData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getAllProfiles();
+    } catch (error) {
+      console.error("Error al actualizar el perfil:", error);
+    }
   }
-}
 
-const deleteUserById = async (id) => {
-  try {
-    const token = localStorage.getItem("AUTH_TOKEN");
-    await clienteAxios.delete(`/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    getAllProfiles();
-  } catch (error) {
-    console.error("Error al eliminar el perfil:", error);
+  const deleteUserById = async (id) => {
+    try {
+      const token = localStorage.getItem("AUTH_TOKEN");
+      await clienteAxios.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      getAllProfiles();
+    } catch (error) {
+      console.error("Error al eliminar el perfil:", error);
+    }
   }
-}
   //FIN FUNCIONES PERFIL
 
 
@@ -160,20 +162,6 @@ const deleteUserById = async (id) => {
       console.error('Error al obtener productos:', error);
     }
   }
-
-  const getPurchasedProducts = async () => {
-    try {
-      const token = localStorage.getItem("AUTH_TOKEN");
-      const { data } = await clienteAxios.get("/orders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setPurchasedProducts(data.data); // Ajustar al formato que envíe el backend
-    } catch (error) {
-      console.error("Error al obtener productos comprados:", error);
-    }
-  };
 
   const evaluateProduct = async (productId, evaluation) => {
     try {
@@ -236,6 +224,21 @@ const deleteUserById = async (id) => {
     }
   };
 
+  const getPurchasedProducts = async (user_id) => {
+    const token = localStorage.getItem('AUTH_TOKEN');
+    if (!token) return;
+
+    try {
+      const { data } = await clienteAxios.get(`/products/purchased/${user_id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPurchasedProducts(data.data);
+    } catch (error) {
+      console.error('Error al obtener productos comprados:', error.response?.data || error.message);
+    }
+  };
+
+
   //FIN FUNCIONES PRODUCTOS
 
 
@@ -293,10 +296,28 @@ const deleteUserById = async (id) => {
     setCart([]);
   };
 
+  // const handleClickPagar = () => {
+  //   const token = localStorage.getItem("AUTH_TOKEN");
+  //   if( !token || isTokenExpired( token ) ) {
+  //     localStorage.removeItem("AUTH_TOKEN");
+  //     Navigate("/login");
+  //   } else {
+  //     clienteAxios.post("/orders", cart, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       }
+  //     }).then((response) => {
+  //       setCart([]);
+  //       getPurchasedProducts();
+  //       navigate("/purchased");
+  //     })
+  //   }
+  // }
+
   //FIN FUNCIONES CARRITO
 
 
-//MODALES
+  //MODALES
   const handleSetShowEditModal = (show) => {
     setShowEditModal(show)
   }
