@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import ModalAdminProduct from '../components/ModalAdminProduct';
+import {ModalCreateProduct} from '../components/ModalCreateProduct';
 import useTienda from '../hooks/useTienda';
 
 export const AdminProductos = () => {
-  const { allProducts, getAllProducts, updateProductById, deleteProductById } = useTienda();
+  const { allProducts, getAllProducts, updateProductById, deleteProductById, getCategories, categories } = useTienda();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
 
   useEffect(() => {
     getAllProducts(); // Cargar productos al montar el componente
+    getCategories();
   }, []);
 
   const handleEdit = (product) => {
@@ -22,6 +25,10 @@ export const AdminProductos = () => {
     if (confirm) {
       await deleteProductById(id); // Llamar a la función del contexto
     }
+  };
+
+  const handleCreate = () => {
+    setIsModalCreateOpen(true);
   };
 
   const columnas = [
@@ -83,7 +90,10 @@ export const AdminProductos = () => {
   };
 
   return (
-    <div className="container my-5 py-5">
+    <div className="container py-5">
+      <div className="d-flex justify-content-end">
+      <button className="btn btn-primary p-2 mb-3" onClick={() => handleCreate()}>Agregar Producto</button>
+      </div>
       <DataTable
         title="Lista de Productos"
         columns={columnas}
@@ -100,6 +110,12 @@ export const AdminProductos = () => {
         onClose={() => setIsModalOpen(false)}
         isModalOpen={isModalOpen}
         updateProductById={updateProductById}
+      />
+
+      <ModalCreateProduct
+        onClose={() => setIsModalCreateOpen(false)}
+        isModalCreateOpen={isModalCreateOpen}
+        categories={categories}
       />
     </div>
   );

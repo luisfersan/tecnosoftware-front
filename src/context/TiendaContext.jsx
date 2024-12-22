@@ -238,6 +238,17 @@ const TiendaProvider = ({ children }) => {
     }
   };
 
+  const createProduct = async (productData) => {
+    try {
+      const token = localStorage.getItem('AUTH_TOKEN');
+      const { data } = await clienteAxios.post('/products', productData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      getAllProducts();
+    } catch (error) {
+      console.error('Error al crear el producto:', error.response?.data || error.message);
+    }
+  };
 
   //FIN FUNCIONES PRODUCTOS
 
@@ -352,9 +363,9 @@ const TiendaProvider = ({ children }) => {
         handleSetActualCategory,
         getCategories,
         getProfile,
-        categories,
         products,
         getPurchasedProducts,
+        purchasedProducts,
         evaluateProduct,
         updateProfile,
         handleClickEndSession,
@@ -365,7 +376,8 @@ const TiendaProvider = ({ children }) => {
         updateUserById,
         deleteUserById,
         updateProductById,
-        deleteProductById
+        deleteProductById,
+        createProduct
       }}
     >
       {children}

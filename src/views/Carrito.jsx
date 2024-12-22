@@ -116,7 +116,7 @@ export const Carrito = () => {
       <h1 className="text-center text-white mt-5">Carrito de Compras</h1>
 
       {cart.length === 0 ? (
-        <p className="text-center">Tu carrito está vacío.</p>
+        <p className="text-center text-white">Tu carrito está vacío.</p>
       ) : (
         <>
           <DataTable
