@@ -1,4 +1,4 @@
-# Módulo 7 Hito 2 Desarrollo Frontend - e-commerce del Marketplace de Tecnología y Software “TecnoSoftware”
+# Módulo 7 Hito 4 Integración y Despliegue - e-commerce del Marketplace de Tecnología y Software “TecnoSoftware”
 
 ## Presentación del Desafío
 
@@ -21,14 +21,8 @@ En la consola bash:
 
 ## Requerimientos entregados:
 
-1. Se crea un nuevo proyecto con las dependencias acorde al diseño y temática definida en el hito 1.
-2. Se crean los componentes para la reutilización de código y separación de secciones integrando los hooks necesarios que correspondan. Utilizamos React Router para la navegación entre rutas.
-3. Reutilizamos componentes haciendo uso del paso de props y renderización dinámica.
-4. Hacemos uso de los hooks para un desarrollo ágil y reactivo.
-5. Utilizamos Context API para el manejo del estado global.
-6. Preparamos la aplicación para el consumo de datos siguiendo el contrato definido en el hito 1.
-
-En cosntrucción: menú Carrito, Mi Perfil y ajustes generales.
+1. Se intenta realizar deploy de la aplicación BDD, cliente y backend en Render con lo medio explicado por la ADL.
+2. Se realizó el deploy, pero no se logran ver las imágenes: https://tecnosoftware-front.onrender.com
 
 ## <br/>
 
@@ -36,7 +30,8 @@ En cosntrucción: menú Carrito, Mi Perfil y ajustes generales.
 
 - **Backend:** Node.js, Express.js, JS. 🧑‍💻
 - **Frontend:** HTML, CSS, Bootstrap, Axios. 📚
-- **Almacenamiento:** Archivos JSON. 🫙
+- **Almacenamiento:** BDD PostgreSQL. 🫙
+- **Deploy:** Render 😶‍🌫️
 
 <br/>
 
