@@ -94,7 +94,7 @@ export const Login = () => {
 
         <div className="d-flex justify-content-between">
         <Link
-          to="/registro"
+          to="/auth/registro"
           className="link-light link-opacity-75-hover text-decoration-none link-text"
         >
           ¿No tienes una cuenta? Registrate

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Registro.css' // Importa el archivo CSS correspondiente
 import clienteAxios from '../config/axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const Registro = () => {
 
@@ -117,7 +117,22 @@ export const Registro = () => {
 
         {/* Mensaje de éxito */}
         {successMessage && <p className="register-success">{successMessage}</p>}
+        <div className="d-flex justify-content-between">
+        <Link
+          to="/auth/login"
+          className="link-light link-opacity-75-hover text-decoration-none link-text"
+        >
+          Ya tienes cuenta? Ingresa aquí
+        </Link>
+        <Link
+          to="/"
+          className="link-light link-opacity-75-hover text-decoration-none link-text"
+        >
+          Volver al inicio
+        </Link>
+        </div>
       </form>
+
     </div>
   )
 }

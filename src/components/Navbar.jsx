@@ -9,7 +9,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className='w-100 navbar navbar-expand-lg navbar-primary bg-dark fixed-top py-2'
+      className='w-100 navbar navbar-expand-lg navbar-primary bg-dark py-2'
     >
       <div className="container d-flex justify-content-between movile-view">
         <div className="img-container">
@@ -19,7 +19,7 @@ export const Navbar = () => {
 
           <Link to="/">
             <img
-              src=""
+              src="./img/logoTecnosoftware.png"
               alt="TecnoSoftware"
               className="mb-0 img-navbar"
             />

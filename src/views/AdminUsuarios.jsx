@@ -74,11 +74,9 @@ useEffect(() => {
     selectAllRowsItemText: 'Todos',
   };
 
-  console.log(allProfiles)
-
 
   return (
-    <div className="container my-5 py-5">
+    <div className="container py-5">
       <DataTable
         title="Lista de Usuarios"
         columns={columnas}
